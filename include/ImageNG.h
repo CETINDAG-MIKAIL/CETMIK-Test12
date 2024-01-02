@@ -10,7 +10,7 @@ using namespace std;
 	{
 		private : 
 
-			int matrice[650][650];
+			int matrice[550][550];
 			bool compI(const ImageNG& , const char* );
 
 

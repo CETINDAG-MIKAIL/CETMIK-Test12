@@ -3,7 +3,7 @@
 COMP = g++ -Wall -I include/
 crea = creation de
 
-all:  Test8
+all:  Test9
 
 objs/MyQT.o: sources/MyQT.cpp include/MyQT.h  
 	echo $(crea) MyQT.o
@@ -52,15 +52,23 @@ objs/ArrayList.o: sources/ArrayList.cpp include/ArrayList.h
 	echo $(crea) ArrayList.o
 	$(COMP) sources/ArrayList.cpp -c -o objs/ArrayList.o -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -I. -I/usr/lib64/qt5/mkspecs/linux-g++
 
+objs/SortedArrayList.o: sources/SortedArrayList.cpp include/SortedArrayList.h
+	echo $(crea) SortedArrayList.o
+	$(COMP) sources/SortedArrayList.cpp -c -o objs/SortedArrayList.o -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -I. -I/usr/lib64/qt5/mkspecs/linux-g++
 
 
-Test8: sources/Test8.cpp objs/Exception.o objs/XYException.o objs/RGBException.o objs/ImageRGB.o objs/ImageB.o objs/ImageNG.o objs/Couleur.o objs/Dimension.o objs/MyQT.o objs/Image.o objs/Iterateur.o objs/ArrayList.o 
-	echo $(crea) Test8
-	$(COMP) sources/Test8.cpp objs/Exception.o objs/XYException.o objs/RGBException.o objs/ImageRGB.o objs/ImageB.o objs/ImageNG.o objs/Couleur.o objs/Dimension.o objs/MyQT.o objs/Image.o objs/Iterateur.o objs/ArrayList.o  -o bin/Test8 -lQt5Widgets -lQt5Gui -lQt5Core -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore
+objs/Traitements.o: sources/Traitements.cpp include/Traitements.h
+	echo $(crea) Traitements.o
+	$(COMP) sources/Traitements.cpp -c -o objs/Traitements.o -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -I. -I/usr/lib64/qt5/mkspecs/linux-g++
+
+
+Test9: sources/Test9.cpp objs/Exception.o objs/Traitements.o objs/XYException.o objs/RGBException.o objs/ImageRGB.o objs/ImageB.o objs/ImageNG.o objs/Couleur.o objs/Dimension.o objs/MyQT.o objs/Image.o objs/Iterateur.o objs/ArrayList.o objs/SortedArrayList.o 
+	echo $(crea) Test9
+	$(COMP) sources/Test9.cpp objs/Exception.o objs/Traitements.o objs/XYException.o objs/RGBException.o objs/ImageRGB.o objs/ImageB.o objs/ImageNG.o objs/Couleur.o objs/Dimension.o objs/MyQT.o objs/Image.o objs/Iterateur.o objs/ArrayList.o objs/SortedArrayList.o -o bin/Test9 -lQt5Widgets -lQt5Gui -lQt5Core -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore
 
 
 clean:
 	rm -f objs/*.o core
 
 clobber: clean
-	rm -f bin/Test8
+	rm -f bin/Test9

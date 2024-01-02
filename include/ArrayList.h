@@ -31,6 +31,9 @@ class ArrayList
 	char estVide(void);
 	// type head(void);
 	void insereElement(type n);
+	void trier();
+	int compare(const type& a, const type& b) const;
+
 	int getNombreElements();
 	type& getElement(int);
 	type& retireElement(int);
@@ -40,6 +43,8 @@ class ArrayList
 	// void removeTail (void);
 	void Affiche (void);
 	friend class Iterateur<type>;
+
+
 };
 
 #endif

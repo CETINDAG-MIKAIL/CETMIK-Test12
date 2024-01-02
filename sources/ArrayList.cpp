@@ -105,19 +105,23 @@ int ArrayList<type>::getNombreElements(void)
 template <class type>
 type& ArrayList<type>::getElement(int indice) 
 { 
-	int i=0;
-		noeud<type> *courant = pListe;
-		while(courant != nullptr && indice != i)
-		{
-			courant = courant ->suiv;
-			i++;
-		}
-		if(courant != nullptr)
-			return courant->valeur;
+    int i = 0;
+    noeud<type> *courant = pListe;
 
-	throw std::out_of_range("L'indice est hors limites ou la liste est vide.");
+    while ( i <= indice) {
+    	// cout << "i: " << i << ", indice: " << indice << ", courant: " << courant << endl;
+        if (i == indice) {
+            return courant->valeur;
+        }
+
+        courant = courant->suiv;
+        i++;
+    }
+
+    throw std::out_of_range("L'indice est hors limites ou la liste est vide.");
 }
-template <class type>
+
+template <class type> 
 type& ArrayList<type>::retireElement(int indice) {
     int i = 0;
     noeud<type>* tmp = nullptr;
@@ -227,6 +231,35 @@ void ArrayList<type>::Affiche (void)
 		cout << endl;
 	}
 }
+
+template <class type>
+void ArrayList<type>::trier() {
+    if (pListe == nullptr) {
+        cout << "La liste est vide !" << endl;
+        return;
+    }
+
+    noeud<type> *i, *j;
+    for (i = pListe; i != nullptr; i = i->suiv) {
+        for (j = i->suiv; j != nullptr; j = j->suiv) {
+            if (compare(i->valeur, j->valeur) > 0) { // Utilisation de la fonction compare()
+                type temp = i->valeur;
+                i->valeur = j->valeur;
+                j->valeur = temp;
+            }
+        }
+    }
+}
+
+template <class type>
+int ArrayList<type>::compare(const type& a, const type& b) const {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+}
+
+
+
 // //***** Classe CLisIer *****
 // template <class type>
 // CLisIter<type>::CLisIter (ArrayList<type>& l): lis(l),pCur(l.pListe) 
@@ -276,7 +309,7 @@ void ArrayList<type>::Affiche (void)
 // }
 //***** Instanciation des templates *****
 template class ArrayList<int>;
-template class ArrayList<Couleur>;
+// template class ArrayList<Couleur>;
 
 
 // #include "coord.h"

@@ -92,6 +92,8 @@ Dimension::Dimension(const Dimension& p)
 Dimension::~Dimension()
 {
 	cout << "D Dimension" << endl;
+	setLargeur(0);
+	setHauteur(0);
 }
 
 int Dimension::getLargeur()const{return largeur;}

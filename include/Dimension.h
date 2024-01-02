@@ -1,6 +1,8 @@
 #ifndef DIMENSION_H
 #define DIMENSION_H
 #include <iostream>
+using namespace std;
+
 // #include "ImageNG.h"
 // #include "Dimension.h"
 
@@ -46,8 +48,8 @@ class Dimension
 
 
 // FLUX
-		void Save(ofstream & fichier) const;
-		void Load(ifstream & fichier);
+		void Save(ofstream & ) const;
+		void Load(ifstream & );
 
 
 

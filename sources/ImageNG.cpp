@@ -13,8 +13,8 @@ using namespace std;
 
 
 
-int ImageNG::getL_MAX(){return 650;};
-int ImageNG::getH_MAX(){return 650;};
+int ImageNG::getL_MAX(){return 550;};
+int ImageNG::getH_MAX(){return 550;};
 
 
 int ImageNG::getLuminance()const

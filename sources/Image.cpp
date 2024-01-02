@@ -28,9 +28,9 @@ void Image::setId(int nombre){id=nombre;}
 
 
 void Image::setNom(const char *n){ 
-	if (nom) 
+	if (nom && strlen(nom) > 0) 
 	{
-		delete[] nom;
+		delete nom;
 		nom=NULL;
 	}
 	nom = new char[strlen(n)+1];
@@ -45,14 +45,14 @@ void Image::setDimension(Dimension d1) {
 Image::Image()
 {
 	setId(0);
-	// nom = NULL;
+	nom = NULL;
 	setNom("default");
 }
 
 Image::Image(int nombre,const char *n)
 {
 	setId(nombre);
-	// nom = NULL;
+	nom = NULL;
 	setNom(n);
 }
 
@@ -60,7 +60,7 @@ Image::Image(int nombre,const char *n)
 Image::Image(int nombre, const char *n, Dimension d1)
 {
 	setId(nombre);
-	// nom = NULL;
+	nom = NULL;
 	setNom(n);	
 	setDimension(d1);
 }
@@ -69,7 +69,7 @@ Image::Image(int nombre, const char *n, Dimension d1)
 Image::Image(const Image& p)
 {
 	setId(p.getId());
-	// nom = NULL;
+	nom = NULL;
 	setNom(p.getNom());	
 	setDimension(p.getDimension());
 }
@@ -79,7 +79,7 @@ Image::Image(const Image& p)
 Image::Image(const char* fichier)
 {
 	setId(1);
-	// nom = NULL;
+	nom = NULL;
 	setNom(fichier);	
 }
 
