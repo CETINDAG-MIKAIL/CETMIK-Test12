@@ -1,16 +1,16 @@
-	#ifndef IMAGENG_H
-	#define IMAGENG_H
-//#include <iostream>
-	#include "Dimension.h"
+#ifndef IMAGENG_H
+#define IMAGENG_H
+#include <iostream>
+#include "Dimension.h"
+#include "Image.h"
+using namespace std;
 
-	class ImageNG
+
+	class ImageNG : public Image 
 	{
 		private : 
 
-			int id;
-			char* nom;
-			Dimension dimension;
-			int matrice[500][500];
+			int matrice[650][650];
 			bool compI(const ImageNG& , const char* );
 
 
@@ -19,13 +19,9 @@
 
 //		GET
 
-		
 		static int 	getL_MAX();
 		static int 	getH_MAX(); 	
 
-		int 		getId()const;
-		char* 		getNom() const ;
-		Dimension 	getDimension() const;
 
 	    int 		getLuminance()const;
 	    int 		getMinimum()const;
@@ -41,16 +37,12 @@
 		void setL_MAX(int);
 		void setH_MAX(int);
 
-		void setId(int);
-		void setNom(const char *);
-		void setDimension(Dimension);
 
 		void 	setBackground(int );
 	    void 	setPixel(int , int, int );
 //		CONSTRUCTEUR 
 
 
-		~ImageNG();
 		ImageNG();
 		ImageNG(int,const char *);
 		ImageNG(int,const char *, Dimension);
@@ -87,19 +79,18 @@
 		friend std::ostream& operator<<(std::ostream& os, const ImageNG& i1);
 
 
+ 	 ~ImageNG();  // Destructeur virtuel
+     void Affiche() const override;  // Implémentation de Affiche()
+     void Dessine() const override;  // Implémentation de Dessine()
+	 void importFromFile(const char* fichier);
+     void exportToFile(const char* fichier, const char* format) const override;  // Implémentation de exportToFile()
 
-		void Affiche();
-		void 	Dessine();
-	    void 	importFromFile(const char* fichier);
-	    void 	exportToFile(const char* fichier, const char* format);
-	    
+	// FLUX
 
-
-
-
-
-
-
+	void Save(ofstream & ) const;
+	void Load(ifstream & );
 
 	};
+
+
 	#endif

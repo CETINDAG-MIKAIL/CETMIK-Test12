@@ -1,6 +1,10 @@
 #ifndef DIMENSION_H
 #define DIMENSION_H
 #include <iostream>
+// #include "ImageNG.h"
+// #include "Dimension.h"
+
+
 class Dimension
 { 
 	private :
@@ -39,6 +43,12 @@ class Dimension
 		Dimension(int,int);
 		Dimension(int,int,Dimension);
 		Dimension(const Dimension &p);
+
+
+// FLUX
+		void Save(ofstream & fichier) const;
+		void Load(ifstream & fichier);
+
 
 
 };
