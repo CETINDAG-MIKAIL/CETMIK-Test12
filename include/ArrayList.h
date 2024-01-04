@@ -3,6 +3,7 @@
 // #include "ImageNG.h"
 #include "Dimension.h"
 #include "Couleur.h"
+#include "Image.h"
 
 #include <iostream>
 using namespace std;
@@ -43,6 +44,7 @@ class ArrayList
 	// void removeTail (void);
 	void Affiche (void);
 	friend class Iterateur<type>;
+
 
 
 };

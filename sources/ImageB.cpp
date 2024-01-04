@@ -13,8 +13,8 @@ using namespace std;
 	
 
 
-int ImageB::getL_MAX(){return 300;};
-int ImageB::getH_MAX(){return 300;};
+int ImageB::getL_MAX(){return 550;};
+int ImageB::getH_MAX(){return 550;};
 Couleur ImageB::couleurTrue=Couleur(255,255,255);
 Couleur ImageB::couleurFalse = Couleur(0,0,0);
 

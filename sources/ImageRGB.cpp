@@ -16,8 +16,8 @@ using namespace std;
 
 
 
-int ImageRGB::getL_MAX(){return 300;};
-int ImageRGB::getH_MAX(){return 300;};
+int ImageRGB::getL_MAX(){return 550;};
+int ImageRGB::getH_MAX(){return 550;};
 
 
 

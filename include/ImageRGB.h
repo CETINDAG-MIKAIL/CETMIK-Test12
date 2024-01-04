@@ -15,7 +15,7 @@
 			// int id;
 			// char* nom;
 			// Dimension dimension;
-			Couleur matrice[300][300];
+			Couleur matrice[550][550];
 			// bool compI(const ImageRGB& , const char* );
 
 
@@ -55,7 +55,7 @@
 
 
  	 ~ImageRGB();  // Destructeur virtuel
-     void Affiche() const;  // Implémentation de Affiche()
+     void Affiche() const override;  // Implémentation de Affiche()
      void Dessine() const;  // Implémentation de Dessine()
 	 void importFromFile(const char* fichier);
      void exportToFile(const char* fichier, const char* format) const;  // Implémentation de exportToFile()

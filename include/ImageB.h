@@ -11,7 +11,7 @@
 	class ImageB : public Image 
 	{
 		private : 
-			bool matrice[300][300];
+			bool matrice[550][550];
 		public :
 
 
@@ -52,7 +52,7 @@
 
 
  	 ~ImageB();  // Destructeur virtuel
-     void Affiche() const;  // Implémentation de Affiche()
+     void Affiche() const override;  // Implémentation de Affiche()
      void Dessine() const;  // Implémentation de Dessine()
 	 // void importFromFile(const char* fichier);
      void exportToFile(const char* fichier, const char* format) const;  // Implémentation de exportToFile()

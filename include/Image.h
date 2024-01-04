@@ -26,7 +26,7 @@ class Image
 		Image(const Image& );
 		Image(const char* );
 		
-		void Affiche();
+		// void Affiche();
 		virtual ~Image();
 	    virtual void Affiche() const = 0;  
 	    virtual void Dessine() const = 0;  

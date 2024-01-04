@@ -4,6 +4,7 @@
 
 using namespace std;
 #include "ArrayList.h"
+#include "PhotoShop.h"
 #include "Iterateur.h"
 #include "MyQT.h"
 // #include "Dimension.h"
@@ -309,6 +310,8 @@ int ArrayList<type>::compare(const type& a, const type& b) const {
 // }
 //***** Instanciation des templates *****
 template class ArrayList<int>;
+template class ArrayList<Image*>;
+
 // template class ArrayList<Couleur>;
 
 

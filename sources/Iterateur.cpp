@@ -57,5 +57,6 @@ type& Iterateur<type>::operator& (void)
 }
 template class Iterateur<int>;
 template class Iterateur<Couleur>;
+template class Iterateur<Image*>;
 
 

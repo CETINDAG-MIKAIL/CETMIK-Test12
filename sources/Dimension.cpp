@@ -15,8 +15,8 @@ using namespace std;
 ///////////// constructeur par default //////////////
 Dimension::Dimension()
 {
-	setLargeur(300);
-	setHauteur(300);
+	setLargeur(550);
+	setHauteur(550);
 }
 
 std::ostream& operator<<(std::ostream& os, const Dimension& d1)
@@ -91,7 +91,7 @@ Dimension::Dimension(const Dimension& p)
 /////////// Destructeur ////////////////////
 Dimension::~Dimension()
 {
-	cout << "D Dimension" << endl;
+	// cout << "D Dimension" << endl;
 	setLargeur(0);
 	setHauteur(0);
 }
