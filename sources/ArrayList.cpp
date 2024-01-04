@@ -85,7 +85,7 @@ char ArrayList<type>::estVide(void)
 template <class type>
 int ArrayList<type>::getNombreElements(void) 
 { 
-	int i=0;
+	int i=1;
 	if(pListe == nullptr){
 		return i;	
 	} 
@@ -106,7 +106,7 @@ int ArrayList<type>::getNombreElements(void)
 template <class type>
 type& ArrayList<type>::getElement(int indice) 
 { 
-    int i = 0;
+    int i = 1;
     noeud<type> *courant = pListe;
 
     while ( i <= indice) {
@@ -124,7 +124,7 @@ type& ArrayList<type>::getElement(int indice)
 
 template <class type> 
 type& ArrayList<type>::retireElement(int indice) {
-    int i = 0;
+    int i = 1;
     noeud<type>* tmp = nullptr;
     noeud<type>* courant = pListe;
     noeud<type>* prec = nullptr;
@@ -136,7 +136,7 @@ type& ArrayList<type>::retireElement(int indice) {
     }
 
     if (courant != nullptr) {
-        if (indice == 0) {
+        if (indice == 1) {
             tmp = courant;
             pListe = courant->suiv;
         } else {

@@ -13,8 +13,15 @@ class PhotoShop
 	private:
 	ArrayList<Image*> images;
 	static int numCourant;
-	public:
+	static PhotoShop instance;
+	
 	PhotoShop();
+	PhotoShop(PhotoShop&);
+	PhotoShop& operator=(const PhotoShop&);
+	
+	public:
+	
+	static PhotoShop& getInstance();
 	~PhotoShop();
 	
 

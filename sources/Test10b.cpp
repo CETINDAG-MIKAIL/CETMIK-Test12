@@ -66,7 +66,7 @@ int main(int argc,char* argv[])
   PhotoShop::getInstance().afficheImages();
 
   cout << endl << "//***** Apres suppression par id (4) *********************************" << endl;
-  PhotoShop::getInstance().supprimeImageParId(4);
+  PhotoShop::getInstance().supprimeImageParId(5);
   PhotoShop::getInstance().afficheImages();  
   
   return 0;
