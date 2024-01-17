@@ -31,6 +31,8 @@ class Image
 	    virtual void Affiche() const = 0;  
 	    virtual void Dessine() const = 0;  
 	    virtual void exportToFile(const char* fichier, const char* format) const = 0;
+		virtual std::string getType() const = 0;
+
 
 };
 #endif

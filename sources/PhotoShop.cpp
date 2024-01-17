@@ -127,3 +127,8 @@ PhotoShop& PhotoShop::getInstance()
 {
 	return instance;
 }
+ArrayList<Image*>&  PhotoShop::getImages()
+{
+    cout << "ICI" << endl;
+    return images;
+}

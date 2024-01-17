@@ -385,3 +385,7 @@ void ImageNG::Load(ifstream & fichierD)
 
 	fichierD.close();
 }
+std::string ImageNG::getType() const  
+{
+        return "NG";
+}

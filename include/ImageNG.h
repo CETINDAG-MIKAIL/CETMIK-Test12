@@ -90,6 +90,8 @@ using namespace std;
 	void Save(ofstream & ) const;
 	void Load(ifstream & );
 
+	std::string getType() const override;
+
 	};
 
 

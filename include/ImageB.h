@@ -63,5 +63,7 @@
 
      	void Save(ofstream & fichier) const;
 		void Load(ifstream & fichier);
+
+		std::string getType() const override;
 	};
 	#endif

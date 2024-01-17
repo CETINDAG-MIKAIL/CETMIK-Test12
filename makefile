@@ -3,7 +3,7 @@
 COMP = g++ -Wall -I include/
 crea = creation de
 
-all:	Test10b
+all:	ApplicPhotoShop
 
 objs/MyQT.o: sources/MyQT.cpp include/MyQT.h  
 	echo $(crea) MyQT.o
@@ -65,13 +65,26 @@ objs/Traitements.o: sources/Traitements.cpp include/Traitements.h
 	echo $(crea) Traitements.o
 	$(COMP) sources/Traitements.cpp -c -o objs/Traitements.o -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -I. -I/usr/lib64/qt5/mkspecs/linux-g++
 
-Test10b: sources/Test10b.cpp objs/Exception.o objs/Traitements.o objs/PhotoShop.o objs/XYException.o objs/RGBException.o objs/ImageRGB.o objs/ImageB.o objs/ImageNG.o objs/Couleur.o objs/Dimension.o objs/MyQT.o objs/Image.o objs/Iterateur.o objs/ArrayList.o objs/SortedArrayList.o 
-	echo $(crea) Test10b
-	$(COMP) sources/Test10b.cpp objs/Exception.o objs/Traitements.o objs/PhotoShop.o objs/XYException.o objs/RGBException.o objs/ImageRGB.o objs/ImageB.o objs/ImageNG.o objs/Couleur.o objs/Dimension.o objs/MyQT.o objs/Image.o objs/Iterateur.o objs/ArrayList.o objs/SortedArrayList.o -o bin/Test10b -lQt5Widgets -lQt5Gui -lQt5Core -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore
 
+
+objs/moc_mainwindowphotoshop.o:	sources/moc_mainwindowphotoshop.cpp include/mainwindowphotoshop.h
+	echo Creation de moc_mainwindowphotoshop.o...
+	$(COMP) sources/moc_mainwindowphotoshop.cpp -c -o objs/moc_mainwindowphotoshop.o -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -I. -I/usr/lib64/qt5/mkspecs/linux-g++
+
+objs/mainwindowphotoshop.o:	sources/mainwindowphotoshop.cpp include/mainwindowphotoshop.h include/ui_mainwindowphotoshop.h 	
+	echo Creation de mainwindowphotoshop.o...
+	$(COMP) sources/mainwindowphotoshop.cpp -c -o objs/mainwindowphotoshop.o -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -I. -I/usr/lib64/qt5/mkspecs/linux-g++
+
+objs/main.o:	sources/main.cpp
+	echo Creation de main.o...
+	$(COMP) sources/main.cpp -c -o objs/main.o -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -I. -I/usr/lib64/qt5/mkspecs/linux-g++
+
+ApplicPhotoShop: objs/moc_mainwindowphotoshop.o objs/mainwindowphotoshop.o objs/main.o objs/Exception.o objs/Traitements.o objs/PhotoShop.o objs/XYException.o objs/RGBException.o objs/ImageRGB.o objs/ImageB.o objs/ImageNG.o objs/Couleur.o objs/Dimension.o objs/MyQT.o objs/Image.o objs/Iterateur.o objs/ArrayList.o objs/SortedArrayList.o 
+	echo $(crea) ApplicPhotoShop
+	$(COMP) objs/moc_mainwindowphotoshop.o objs/mainwindowphotoshop.o objs/main.o objs/Exception.o objs/Traitements.o objs/PhotoShop.o objs/XYException.o objs/RGBException.o objs/ImageRGB.o objs/ImageB.o objs/ImageNG.o objs/Couleur.o objs/Dimension.o objs/MyQT.o objs/Image.o objs/Iterateur.o objs/ArrayList.o objs/SortedArrayList.o -o bin/ApplicPhotoShop -lQt5Widgets -lQt5Gui -lQt5Core -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore
 
 clean:
 	rm -f objs/*.o core
 
 clobber: clean
-	rm -f bin/Test10b
+	rm -f bin/ApplicPhotoShop

@@ -65,5 +65,7 @@
 
      	void Save(ofstream & fichier) const;
 		void Load(ifstream & fichier);
+		string getType() const override;
+
 	};
 	#endif

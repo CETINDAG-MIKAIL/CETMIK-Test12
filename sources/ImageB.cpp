@@ -196,3 +196,7 @@ void ImageB::Load(ifstream & fichierD)
 
 	fichierD.close();
 }
+std::string ImageB::getType() const  
+{
+        return "B";
+}

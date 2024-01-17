@@ -156,6 +156,7 @@ void ImageRGB::importFromFile(const char* fichier){
 }
 
 void ImageRGB::exportToFile(const char* fichier, const char* format)const {
+	cout << "fichier" << fichier << endl << "format" << format << endl;
     MyQT::ExportToFile(*this, fichier, format);
 }
 
@@ -198,4 +199,8 @@ void ImageRGB::Load(ifstream & fichierD)
 	fichierD.read((char *)(this), sizeof(*this));
 
 	fichierD.close();
+}
+string ImageRGB::getType() const  
+{
+	return "RGB";
 }
