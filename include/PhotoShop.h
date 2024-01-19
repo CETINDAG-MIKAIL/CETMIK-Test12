@@ -22,6 +22,12 @@ class PhotoShop
 	public:
 	
 	static PhotoShop& getInstance();
+	
+	static Image* operande1;
+	static Image* operande2;
+	static Image* resultat;
+
+
 	~PhotoShop();
 	
 

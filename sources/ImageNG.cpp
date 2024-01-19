@@ -130,9 +130,9 @@ bool ImageNG::compI(const ImageNG& i1, const char* op)
        
             if(strcmp(op, "==") == 0 && matrice[i][j] != i1.matrice[i][j])
             	return false;
-        	else if((strcmp(op, "<") == 0 && matrice[i][j] >= i1.matrice[i][j]))
+        	else if((strcmp(op, "<") == 0) && (matrice[i][j] >= i1.matrice[i][j]))
         		return false;
-        	else if((strcmp(op, ">") == 0 && matrice[i][j] <= i1.matrice[i][j]))
+        	else if((strcmp(op, ">") == 0) && (matrice[i][j] <= i1.matrice[i][j]))
         		return false;
         }
 
@@ -308,7 +308,7 @@ bool ImageNG::operator<(const ImageNG& d)
 
 bool ImageNG::operator>(const ImageNG& d)
 {
-    return compI(d, "<");
+    return compI(d, ">");
 }
 
 

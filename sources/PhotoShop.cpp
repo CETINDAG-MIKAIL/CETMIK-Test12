@@ -6,6 +6,9 @@
 #include "Iterateur.h"
 
 using namespace std;
+Image* PhotoShop::operande1 = nullptr;
+Image* PhotoShop::operande2 = nullptr;
+Image* PhotoShop::resultat = nullptr;
 int PhotoShop::numCourant = 1;
 
 PhotoShop::PhotoShop()

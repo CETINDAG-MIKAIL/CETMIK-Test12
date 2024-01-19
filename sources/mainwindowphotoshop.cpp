@@ -50,10 +50,10 @@ MainWindowPhotoShop::MainWindowPhotoShop(QWidget *parent) : QMainWindow(parent),
 
     // Intialisation des scrollArea
     
-    setImageNG("selection");
-    setImageNG("operande1");
-    setImageNG("operande2");
-    setImageNG("resultat");
+    // setImageNG("selection");
+    // setImageNG("operande1");
+    // setImageNG("operande2");
+    // setImageNG("resultat");
     
 
     // ComboBox des traitements disponibles
@@ -602,6 +602,49 @@ void MainWindowPhotoShop::on_actionEnregistrer_ImageNB_triggered()
 void MainWindowPhotoShop::on_actionEnregistrer_ImageB_triggered()
 {
   // Etape 11 (TO DO)
+  int indice = getIndiceImageSelectionnee();
+    cout << "indice" << indice << endl;
+    if (indice == -1)
+    {
+        dialogueErreur("Enregistrement echoue", "Aucune image trouve");
+    }
+    else
+    {
+        PhotoShop &photoShop = PhotoShop::getInstance();
+
+        Image *image = photoShop.getImageParIndice(indice);
+
+        if (image != nullptr)
+        {
+            const char *nomString = image->getType().c_str();
+            if (strcmp("B", nomString) == 0)
+            {
+                string fichier = dialogueDemandeFichierEnregistrer("Entrez le nom de l'image");
+
+                string TypeDeFichierAEnregistrer = dialogueDemandeTexte("Type a enregistrer", "Quel type de fichier voulez-vous enregistrer (JPG/PNG/BMP)");
+
+                ImageB *nouvelleImage = dynamic_cast<ImageB *>(image); // sert a verifier si le type est de type ImageRGB si oui alors nouvelleImage est different de NULL
+
+                if (nouvelleImage != nullptr)
+                {
+                    nouvelleImage->exportToFile(fichier.c_str(), TypeDeFichierAEnregistrer.c_str());
+                    cout << "Enregistrement réussi" << endl;
+                }
+                else
+                {
+                    dialogueErreur("Enregistrement echoue", "Conversion vers ImageNG a échoué");
+                }
+            }
+            else
+            {
+                dialogueErreur("Enregistrement echoue", "Mauvais type d'image trouve");
+            }
+        }
+        else
+        {
+            dialogueErreur("Enregistrement echoue", "Image non trouvée");
+        }
+    }
 
 }
 
@@ -685,15 +728,38 @@ void MainWindowPhotoShop::on_actionImage_par_id_triggered()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindowPhotoShop::on_actionCouleur_TRUE_pour_ImageB_triggered()
 {
-  // Etape 12 (TO DO)
+    // Etape 12 (TO DO)
+    PhotoShop& photoShop = PhotoShop::getInstance();
+    int indice = getIndiceImageSelectionnee();
+    Image* image = photoShop.getImageParIndice(indice);
 
+    int pRouge, pVert, pBleu;  // Allouer des variables pour stocker les valeurs
+
+    dialogueDemandeCouleur("Veillez choisir une couleur", &pRouge, &pVert, &pBleu);
+
+    if (ImageB* nouvelleImage = dynamic_cast<ImageB*>(image))
+    {
+        nouvelleImage->couleurTrue = Couleur(pRouge, pVert, pBleu);
+    }
 }
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindowPhotoShop::on_actionCouleur_FALSE_pour_imageB_triggered()
 {
-  // Etape 12 (TO DO)
+  
+    PhotoShop& photoShop = PhotoShop::getInstance();
+    int indice = getIndiceImageSelectionnee();
+    Image* image = photoShop.getImageParIndice(indice);
 
+    int pRouge, pVert, pBleu;  // Allouer des variables pour stocker les valeurs
+
+    dialogueDemandeCouleur("Veillez choisir une couleur", &pRouge, &pVert, &pBleu);
+
+    if (ImageB* nouvelleImage = dynamic_cast<ImageB*>(image))
+    {
+        nouvelleImage->couleurFalse = Couleur(pRouge, pVert, pBleu);
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -790,35 +856,155 @@ void MainWindowPhotoShop::on_pushButtonModifierNom_clicked()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindowPhotoShop::on_pushButtonOperande1_clicked()
 {
-    // Etape 12 (TO DO)
+  int indice = getIndiceImageSelectionnee();
+  cout << "indice" << indice << endl;
+  if (indice == -1)
+  {
+      dialogueErreur("Enregistrement echoue", "Aucune image trouve");
+  }
+  else
+  {
+      PhotoShop &photoShop = PhotoShop::getInstance();
+
+      Image *image = photoShop.getImageParIndice(indice);
+
+      photoShop.operande1= image;
+
+      ImageNG *nouvelleImage = dynamic_cast<ImageNG *>(image);
+      if (nouvelleImage != nullptr)
+      {
+        setParametresImageNG(nouvelleImage->getMaximum(), nouvelleImage->getMinimum(), nouvelleImage->getLuminance(), nouvelleImage->getContraste());
+        setImageNG("operande1",nouvelleImage);
+      }
+      else
+      {
+        ImageRGB *nouvelleImage = dynamic_cast<ImageRGB *>(image); 
+        if (nouvelleImage != nullptr)
+        {
+          setImageRGB("operande1",nouvelleImage);
+        }
+        else
+        {
+          ImageB *nouvelleImage = dynamic_cast<ImageB *>(image); 
+          if (nouvelleImage != nullptr)
+            setImageB("operande1",nouvelleImage);
+        }
+      }
+
+
+
+  }
 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindowPhotoShop::on_pushButtonSupprimeOperande1_clicked()
 {
-    // Etape 12 (TO DO)
-
+  PhotoShop &photoShop = PhotoShop::getInstance();
+  setImageNG("operande1", NULL);
+  photoShop.operande1= nullptr;    
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindowPhotoShop::on_pushButtonOperande2_clicked()
 {
-    // Etape 12 (TO DO)
+    
+  int indice = getIndiceImageSelectionnee();
+  cout << "indice" << indice << endl;
+  if (indice == -1)
+  {
+      dialogueErreur("Enregistrement echoue", "Aucune image trouve");
+  }
+  else
+  {
+      PhotoShop &photoShop = PhotoShop::getInstance();
+
+      Image *image = photoShop.getImageParIndice(indice);
+
+      photoShop.operande2= image;
+
+      ImageNG *nouvelleImage = dynamic_cast<ImageNG *>(image);
+      if (nouvelleImage != nullptr)
+      {
+        setParametresImageNG(nouvelleImage->getMaximum(), nouvelleImage->getMinimum(), nouvelleImage->getLuminance(), nouvelleImage->getContraste());
+        setImageNG("operande2",nouvelleImage);
+      }
+      else
+      {
+        ImageRGB *nouvelleImage = dynamic_cast<ImageRGB *>(image); 
+        if (nouvelleImage != nullptr)
+        {
+          setImageRGB("operande2",nouvelleImage);
+        }
+        else
+        {
+          ImageB *nouvelleImage = dynamic_cast<ImageB *>(image); 
+          if (nouvelleImage != nullptr)
+            setImageB("operande2",nouvelleImage);
+        }
+      }
+    }
+
+
 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindowPhotoShop::on_pushButtonSupprimerOperande2_clicked()
 {
-    // Etape 12 (TO DO)
+  PhotoShop &photoShop = PhotoShop::getInstance();
+  setImageNG("operande2", NULL);
+  photoShop.operande2= nullptr;    
 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindowPhotoShop::on_pushButtonResultat_clicked()
 {
-    // Etape 12 (TO DO)
+   PhotoShop &photoShop = PhotoShop::getInstance();
+  int val =0;
+  if (ImageB *imageB = dynamic_cast<ImageB*>(photoShop.resultat))
+  {
+    val = 1;
+  }
+  else if (ImageRGB *imageRGB = dynamic_cast<ImageRGB*>(photoShop.resultat))
+  {
+              val = 2;
+  }
+  else if (ImageNG *imageNG = dynamic_cast<ImageNG*>(photoShop.resultat))
+  {
+    val = 3;
+  }
+  // Ajouter l'image à la PhotoShop
+    photoShop.ajouteImage(photoShop.resultat);
+
+
+  videTableImages();
+
+  Iterateur<Image*> it(photoShop.getImages());
+
+  it.reset();
+  while(!it.end()) {
+      Image* image = it.operator&(); // Obtention de l'image à partir de l'itérateur      
+      // convertir dimension en string 
+      int width = image->getDimension().getLargeur();
+      int height = image->getDimension().getHauteur();
+      std::string widthString = std::to_string(width);
+      std::string heightString = std::to_string(height);
+      std::string dimensionString = widthString + "x" + heightString;
+      std::string nomString(image->getNom());
+      ajouteTupleTableImages(image->getId(),image->getType(),dimensionString,nomString);
+    it.operator++();
+  }
+  if(val==1)
+    setImageB("resultat", nullptr);
+  else if(val == 2)
+        setImageRGB("resultat", nullptr);
+  else if(val == 3)
+        setImageNG("resultat", nullptr);
+
+    photoShop.resultat = nullptr;
+
 
 }
 
@@ -826,6 +1012,13 @@ void MainWindowPhotoShop::on_pushButtonResultat_clicked()
 void MainWindowPhotoShop::on_pushButtonSupprimerResultat_clicked()
 {
     // Etape 12 (TO DO)
+  PhotoShop &photoShop = PhotoShop::getInstance();
+  
+  delete photoShop.resultat;  
+
+  setImageNG("resultat", nullptr); // dans tous les cas on ne met pas une image dedans donc n'importe quel methode peut etre appeler RGB/NG/B
+
+  photoShop.resultat= nullptr;   
 
 }
 
@@ -833,5 +1026,195 @@ void MainWindowPhotoShop::on_pushButtonSupprimerResultat_clicked()
 void MainWindowPhotoShop::on_pushButtonTraitement_clicked()
 {
     // Etape 12 (TO DO)
+    PhotoShop &photoShop = PhotoShop::getInstance();
 
+    string traitementSelectionne = getTraitementSelectionne();
+    if (photoShop.operande1 != nullptr)
+    {
+        // initialise
+        setResultatBoolean(-1);
+        setImageNG("resultat", NULL);
+        delete photoShop.resultat;  
+        photoShop.resultat = nullptr;
+        int val = -1;
+        ImageNG *resultatNG = new ImageNG();
+        // Traitements nécessitant deux images
+        ImageNG *image1 = dynamic_cast<ImageNG *>(photoShop.operande1);
+        ImageNG *imageCopie = new ImageNG(*image1); // on fait une copie afin de ne pas modifier l'original
+
+        if (traitementSelectionne == "Différence" || traitementSelectionne == "Comparaison (==)" || traitementSelectionne == "Comparaison (<)" || traitementSelectionne == "Comparaison (>)")
+        {
+            if (photoShop.operande2 != nullptr)
+            {
+                // Vérifier si operande1 et operande2 sont du type ImageNG
+                ImageNG *image2 = dynamic_cast<ImageNG *>(photoShop.operande2);
+
+
+                if (image1 != nullptr && image2 != nullptr)
+                {
+                    if (traitementSelectionne == "Différence")
+                    {
+                        *resultatNG = *image1 - *image2;
+                        PhotoShop::resultat = resultatNG; // imageNG -> image , pas besoin de casting car ImageNG est la sous-classe de Image donc la casting est implicite
+                        setImageNG("resultat", resultatNG);
+                    }
+                    else if (traitementSelectionne == "Comparaison (==)")
+                    {
+                        if (*image1 == *image2)
+                            val = 1;
+                        else
+                            val = 0;
+                        setResultatBoolean(val);
+                    }
+                    else if (traitementSelectionne == "Comparaison (<)")
+                    {
+
+                        if (*image1 < *image2)
+                            val = 1;
+                        else
+                            val = 0;
+                        cout << "val" << val << endl;
+                        setResultatBoolean(val);
+                    }
+                    else if (traitementSelectionne == "Comparaison (>)")
+                    {
+
+                        if (*image1 > *image2)
+                            val = 1;
+                        else
+                            val = 0;
+                        cout << "val" << val << endl;
+
+                        setResultatBoolean(val);
+                    }
+                    else
+                    {
+                        // Afficher un message d'erreur pour les traitements non gérés
+                        dialogueErreur("Traitement échoué", "Traitement non pris en charge");
+                    }
+                }
+                else
+                {
+                    // Afficher un message d'erreur, car une ou les deux opérandes ne sont pas du bon type
+                    dialogueErreur("Traitement échoué", "Les opérandes doivent être de type ImageNG");
+                }
+            }
+            else
+            {
+                // Afficher un message d'erreur, car operande2 est NULL
+                dialogueErreur("Traitement échoué", "Aucune opérande 2 sélectionnée");
+            }
+        }
+        else
+        {
+            if (traitementSelectionne == "Filtre moyenneur")
+            {
+              int valeurAutiliser =  dialogueDemandeInt("Insertion Valeur", "Inserez votre valeur");
+              *resultatNG = Traitements::FiltreMoyenneur(*imageCopie, valeurAutiliser);
+              PhotoShop::resultat = resultatNG;
+              setImageNG("resultat", resultatNG);
+            }
+            else
+            {
+              if(traitementSelectionne == "Filtre médian")
+              {
+                int valeurAutiliser =  dialogueDemandeInt("Insertion Valeur", "Inserez votre valeur");
+                *resultatNG = Traitements::FiltreMedian(*imageCopie, valeurAutiliser);
+                PhotoShop::resultat = resultatNG;
+                setImageNG("resultat", resultatNG);
+
+              }
+              else
+              {
+                if(traitementSelectionne == "Erosion")
+                {
+                  int valeurAutiliser =  dialogueDemandeInt("Insertion Valeur", "Inserez votre valeur");
+                  *resultatNG = Traitements::Erosion(*imageCopie, valeurAutiliser);
+                  PhotoShop::resultat = resultatNG;
+                  setImageNG("resultat", resultatNG);
+                }
+                else
+                {
+                  if(traitementSelectionne == "Dilatation")
+                  {
+                    int valeurAutiliser =  dialogueDemandeInt("Insertion Valeur", "Inserez votre valeur");
+                    *resultatNG = Traitements::Dilatation(*imageCopie, valeurAutiliser);
+                    PhotoShop::resultat = resultatNG;
+                    setImageNG("resultat", resultatNG);
+                  }
+                  else
+                  {
+                    if(traitementSelectionne == "Négatif")
+                    {
+                      *resultatNG = Traitements::Negatif(*imageCopie);
+                      PhotoShop::resultat = resultatNG;
+                      setImageNG("resultat", resultatNG);
+                    }
+                    else
+                    {
+                      if(traitementSelectionne == "Seuillage")
+                      {
+                        int valeurAutiliser =  dialogueDemandeInt("Insertion Valeur", "Inserez votre valeur");
+                        ImageB *resultatB = new ImageB();
+                        *resultatB = Traitements::Seuillage(*imageCopie, valeurAutiliser);
+                        PhotoShop::resultat = resultatNG;
+                        setImageB("resultat", resultatB);
+                      }
+                      else
+                      {
+                        if(traitementSelectionne == "Eclaircir (++)")
+                        {
+                          *resultatNG = imageCopie->operator++();
+                          PhotoShop::resultat = resultatNG;
+                          setImageNG("resultat", resultatNG);
+                        }
+                        else
+                        {
+                          if(traitementSelectionne == "Assombrir (--)")
+                          {
+                            *resultatNG = imageCopie->operator--();
+                            PhotoShop::resultat = resultatNG;
+                            setImageNG("resultat", resultatNG);
+                          }
+                          else
+                          {
+                            if(traitementSelectionne == "Eclaircir (+ val)")
+                            {
+                              int valeurAutiliser =  dialogueDemandeInt("Insertion Valeur", "Inserez votre valeur");
+                              *resultatNG = imageCopie->operator+(valeurAutiliser);
+                              PhotoShop::resultat = resultatNG;
+                              setImageNG("resultat", resultatNG);
+                            }
+                            else
+                            {
+                              if(traitementSelectionne == "Assombrir (- val)")
+                              {
+                                int valeurAutiliser =  dialogueDemandeInt("Insertion Valeur", "Inserez votre valeur");
+                                *resultatNG = imageCopie->operator-(valeurAutiliser);
+                                PhotoShop::resultat = resultatNG;
+                                setImageNG("resultat", resultatNG);
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                  }
+                }
+              }
+
+            }
+        }
+    }
+    else
+    {
+        // Afficher un message d'erreur, car operande1 est NULL
+        dialogueErreur("Traitement échoué", "Aucune opérande 1 sélectionnée");
+    }
 }
+
+
+
+
+    
